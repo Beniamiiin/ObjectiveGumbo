@@ -68,6 +68,32 @@
     }];
 }
 
+-(OGElement*)elementWithMultipleClass:(NSString*)classes
+{
+    NSString *separator = @" ";
+    NSMutableArray *p_classes = [[classes componentsSeparatedByString:separator] mutableCopy];
+    
+    NSArray *elements = [self elementsWithClass:[p_classes firstObject]];
+    
+    if ( !elements.count || ![[elements firstObject] isKindOfClass:[OGElement class]] )
+    {
+        return nil;
+    }
+    
+    OGElement *element = [elements firstObject];
+    [p_classes removeObjectAtIndex:0];
+    
+    if ( p_classes.count )
+    {
+        classes = [p_classes componentsJoinedByString:separator];
+        return [self elementWithMultipleClass:classes];
+    }
+    else
+    {
+        return element;
+    }
+}
+
 -(NSArray*)elementsWithClass:(NSString*)class
 {
     return [self selectWithBlock:^BOOL(id node) {
