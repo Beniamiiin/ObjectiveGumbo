@@ -16,6 +16,7 @@
 @property NSArray * classes;
 @property NSDictionary * attributes;
 
+-(OGElement*)elementWithMultipleClass:(NSString*)classes;
 -(NSArray*)elementsWithAttribute:(NSString *)attribute andValue:(NSString *)value;
 
 @end
